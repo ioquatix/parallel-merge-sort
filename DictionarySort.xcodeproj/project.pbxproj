@@ -30,7 +30,7 @@
 		7EE007B61460EAC800D6D6EE /* DictionarySort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionarySort.h; sourceTree = "<group>"; };
 		7EE007B71461320800D6D6EE /* Benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
 		7EE007B81461321100D6D6EE /* Benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Benchmark.cpp; sourceTree = "<group>"; };
-		7EE007BA1461F3DC00D6D6EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		7EE007BA1461F3DC00D6D6EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 		7E592916145E2E9E00B8A6F0 = {
 			isa = PBXGroup;
 			children = (
-				7EE007BA1461F3DC00D6D6EE /* README.txt */,
+				7EE007BA1461F3DC00D6D6EE /* README.md */,
 				7E592924145E2E9F00B8A6F0 /* DictionarySort */,
 				7E592922145E2E9F00B8A6F0 /* Products */,
 			);
