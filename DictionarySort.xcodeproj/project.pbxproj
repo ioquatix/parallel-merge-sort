@@ -8,26 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		7E592926145E2E9F00B8A6F0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E592925145E2E9F00B8A6F0 /* main.cpp */; };
-		7E592928145E2E9F00B8A6F0 /* DictionarySort.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7E592927145E2E9F00B8A6F0 /* DictionarySort.1 */; };
+		7EE007B91461321100D6D6EE /* Benchmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE007B81461321100D6D6EE /* Benchmark.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7E59291F145E2E9F00B8A6F0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
-				7E592928145E2E9F00B8A6F0 /* DictionarySort.1 in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7E592921145E2E9F00B8A6F0 /* DictionarySort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DictionarySort; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E592925145E2E9F00B8A6F0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		7E592927145E2E9F00B8A6F0 /* DictionarySort.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DictionarySort.1; sourceTree = "<group>"; };
+		7EE007B51460CF5700D6D6EE /* ParallelMergeSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelMergeSort.h; sourceTree = "<group>"; };
+		7EE007B61460EAC800D6D6EE /* DictionarySort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionarySort.h; sourceTree = "<group>"; };
+		7EE007B71461320800D6D6EE /* Benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
+		7EE007B81461321100D6D6EE /* Benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Benchmark.cpp; sourceTree = "<group>"; };
+		7EE007BA1461F3DC00D6D6EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 		7E592916145E2E9E00B8A6F0 = {
 			isa = PBXGroup;
 			children = (
+				7EE007BA1461F3DC00D6D6EE /* README.txt */,
 				7E592924145E2E9F00B8A6F0 /* DictionarySort */,
 				7E592922145E2E9F00B8A6F0 /* Products */,
 			);
@@ -60,8 +64,11 @@
 		7E592924145E2E9F00B8A6F0 /* DictionarySort */ = {
 			isa = PBXGroup;
 			children = (
+				7EE007B71461320800D6D6EE /* Benchmark.h */,
+				7EE007B81461321100D6D6EE /* Benchmark.cpp */,
+				7EE007B51460CF5700D6D6EE /* ParallelMergeSort.h */,
+				7EE007B61460EAC800D6D6EE /* DictionarySort.h */,
 				7E592925145E2E9F00B8A6F0 /* main.cpp */,
-				7E592927145E2E9F00B8A6F0 /* DictionarySort.1 */,
 			);
 			path = DictionarySort;
 			sourceTree = "<group>";
@@ -118,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E592926145E2E9F00B8A6F0 /* main.cpp in Sources */,
+				7EE007B91461321100D6D6EE /* Benchmark.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +169,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -174,6 +183,8 @@
 		7E59292C145E2E9F00B8A6F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -181,6 +192,8 @@
 		7E59292D145E2E9F00B8A6F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -204,6 +217,7 @@
 				7E59292D145E2E9F00B8A6F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
