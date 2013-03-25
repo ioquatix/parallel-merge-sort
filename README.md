@@ -25,7 +25,7 @@ So without automatically detecting the number of processors, the greatest gains 
 
 ## Author's Benchmarks
 
-These benchmarks were performed on a Intel Core i7 2.3Ghz with 16GB main memory and a solid state disk.
+These benchmarks were performed on a Intel Core i7 2.3Ghz, 4 cores = 8 hyper-threads, with 16GB main memory and a solid state disk.
 
 Sorting using builtin `std::sort`:
 
@@ -75,7 +75,7 @@ Next is using my parallel merge sort with a single processor (i.e not parallel a
 	Total Time: 3.67613
 	Finished.
 
-Now the magic happens when we enable  Sort mode = 1 - we have almost 2x performance, using 2x processors.
+Now the magic happens when we enable  Sort mode = 1 - we have almost 2x performance, using 2x threads.
 
 	Sorting 2500000 words...
 	Sort mode = 1
@@ -150,7 +150,7 @@ Unfortunately, we do hit scalability issues:
 	Total Time: 2.40132
 	Finished.
 
-We are using in practice 6x the single processor usage, for a speedup of 2.1/0.7 ≈ 3 times. Another problem is that my processor only has 8 cores, and we are already using 14 threads (but only 8 should be active performing work). The main bottleneck is the top level merge, which I could only make lock free with 2 processors. It is innovative, but using locks might be preferable - it might actually be faster for the top level merge to distribute it over all available processors. Partition is already maximally distributed. But, I can't figure out how to make that merge lock free and the novelty of this approach is that it is lock free.
+We are using in practice 6x the single processor usage, for a speedup of 2.1/0.7 ≈ 3 times. Another problem is that my processor only has 4 cores, and we are already using 14 threads (but only 8 should be active performing work). The main bottleneck is the top level merge, which I could only make lock free with 2 processors. It is innovative, but using locks might be preferable - it might actually be faster for the top level merge to distribute it over all available processors. Partition is already maximally distributed. But, I can't figure out how to make that merge lock free and the novelty of this approach is that it is lock free.
 
 ## Contributing
 
