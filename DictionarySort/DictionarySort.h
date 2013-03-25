@@ -239,7 +239,7 @@ namespace DictionarySort {
                 
                 words[i]->word = input[i];
                 
-                // We can force generation of the order cache, but performance may be reduced.
+                // We can force generation of the order cache, but performance may be reduced by about 10%.
                 //words[i]->fetch_order(this);
             }
             
