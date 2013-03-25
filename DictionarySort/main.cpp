@@ -103,14 +103,19 @@ static void test_dictionary ()
     
     const int K = 5;
     Benchmark::Timer t;
+	Benchmark::ProcessorTime processor_time;
+
     uint64_t checksum;
     for (std::size_t i = 0; i < K; i += 1) {
         checksum = dictionary.sort(words, sorted_words);
     }
-    Benchmark::TimeT elapsed_time = t.time();
+    Benchmark::TimeT elapsed_time = t.time() / K;
+	Benchmark::TimeT elapsed_processor_time = processor_time.time() / K;
     
     std::cerr << "Checksum: " << checksum << " ? " << (checksum == 479465310674138860) << std::endl;
-    std::cerr << "Time: " << (elapsed_time / K) << std::endl;
+    std::cerr << "Time: " << elapsed_time << std::endl;
+	std::cerr << "Processor Time: " << elapsed_processor_time << std::endl;
+	std::cerr << "Approximate CPU Usage: " << (elapsed_processor_time / elapsed_time) << std::endl;
         
     std::cerr << "Finished." << std::endl;
 }

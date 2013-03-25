@@ -9,6 +9,8 @@
 #ifndef DictionarySort_Benchmark_h
 #define DictionarySort_Benchmark_h
 
+#include <ctime>
+
 // A timer class for quickly checking the wall-clock performance of code.
 namespace Benchmark {
     typedef double TimeT;
@@ -17,13 +19,23 @@ namespace Benchmark {
     protected:
         mutable TimeT _last, _total;
         
-    public:	
+    public:
         Timer ();
-        virtual ~Timer ();
         
-        virtual void reset ();
-        virtual TimeT time () const;
+        void reset ();
+        TimeT time () const;
     };
+
+	class ProcessorTime {
+	protected:
+		mutable std::clock_t _last, _total;
+
+	public:
+		ProcessorTime();
+
+		void reset ();
+		TimeT time ();
+	};
 }
 
 #endif

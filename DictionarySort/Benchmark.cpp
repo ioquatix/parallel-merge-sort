@@ -22,10 +22,6 @@ namespace Benchmark {
         this->reset();
     }
     
-    Timer::~Timer () {
-        
-    }
-    
     void Timer::reset () {
         this->_last = system_time();
         this->_total = 0.0;
@@ -37,4 +33,24 @@ namespace Benchmark {
         this->_last = current;
         return this->_total;
     }
+
+	ProcessorTime::ProcessorTime()
+	{
+		this->reset();
+	}
+
+	void ProcessorTime::reset ()
+	{
+		this->_last = std::clock();
+		this->_total = 0;
+	}
+
+	TimeT ProcessorTime::time ()
+	{
+		std::clock_t current = std::clock();
+		this->_total += std::clock() - this->_last;
+		this->_last = current;
+		
+		return TimeT(this->_total) / TimeT(CLOCKS_PER_SEC);
+	}
 }
