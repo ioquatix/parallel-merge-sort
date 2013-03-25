@@ -14,10 +14,12 @@ The dictionary sort algorithm can use either `std::sort` or `ParallelMergeSort::
 The parallel merge sort algorithm can be distributed over a number of processors in a shared memory architecture machine. The default merge sort splits the data to be sorted into two pieces, and sorts each side independently. The data is then merged back together. In this case, the parallel merge sort splits at n top levels of the tree, such that
 
     n = 0, sequential implementation
-    n = 1, split at top level, threads = 2
+    n = 1, split at top level, threads = 2 for partition, 2 for merge, armortised total = 2.
     n = 2, split at top level and one level down, threads = 6
     n = 3, split at top level, ..., threads = 14
     n = 4, ..., threads = 22
+	
+	or generally, 2^n+1 - 2
 
 So without automatically detecting the number of processors, the greatest gains can be made by setting n = 1...3, typically in the range to 2x to 3x the performance over n = 0 and `std::sort`.
 

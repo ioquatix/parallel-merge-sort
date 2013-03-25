@@ -215,7 +215,7 @@ namespace ParallelMergeSort {
         if (count > 1) {
             std::size_t middle_bound = (lower_bound + upper_bound) / 2;
             
-            //Benchmark::Timer tp;
+            //Benchmark::WallTime tp;
             if (PARALLEL_PARTITION && threaded > 0) {
                 // We could check whether there is any work to do before creating threads, but we assume
                 // that threads will only be created high up in the tree by default, so there *should*
@@ -229,15 +229,15 @@ namespace ParallelMergeSort {
                     upper_thread(upper_partition);
                 
                 upper_thread.join();
-                lower_thread.join();                
-            } else {
+                lower_thread.join();
+			} else {
                 // We have hit the bottom of our thread limit.
                 partition(destination, source, comparator, lower_bound, middle_bound);
                 partition(destination, source, comparator, middle_bound, upper_bound);
             }
-            //std::cerr << "Partition Time: " << tp.time() << " [" << lower_bound << " -> " << upper_bound << " : " << threaded << " ]" << std::endl;
+            //std::cerr << "Partition Time: " << tp.total() << " [" << lower_bound << " -> " << upper_bound << " : " << threaded << " ]" << std::endl;
             
-            //Benchmark::Timer tm;
+            //Benchmark::WallTime tm;
             if (PARALLEL_MERGE && threaded > 0 && count > PARALLEL_MERGE_MINIMUM_COUNT) {
                 // By the time we get here, we are sure that both left and right partitions have been merged, e.g. we have two ordered sequences [lower_bound, middle_bound] and [middle_bound, upper_bound]. Now, we need to join them together:
                 ParallelLeftMerge<ArrayT, ComparatorT> left_merge = {source, destination, comparator, lower_bound, middle_bound};
@@ -253,7 +253,7 @@ namespace ParallelMergeSort {
                 // We have hit the bottom of our thread limit, or the merge minimum count.
                 merge(source, destination, comparator, lower_bound, middle_bound, upper_bound);
             }
-            //std::cerr << "Merge Time: " << tm.time() << " [" << lower_bound << " -> " << upper_bound << " : " << threaded << " ]" << std::endl;
+            //std::cerr << "Merge Time: " << tm.total() << " [" << lower_bound << " -> " << upper_bound << " : " << threaded << " ]" << std::endl;
         }
     }
     
@@ -266,12 +266,12 @@ namespace ParallelMergeSort {
     void sort(ArrayT & array, const ComparatorT & comparator, std::size_t threaded = 2) {
         ArrayT temporary(array.begin(), array.end());
         
-        //Benchmark::Timer ts;
+        //Benchmark::WallTime ts;
         if (threaded == 0)
             partition(temporary, array, comparator, 0, array.size());
         else
             partition(temporary, array, comparator, 0, array.size(), threaded);
-        //std::cerr << "Total sort time: " << ts.time() << std::endl;
+        //std::cerr << "Total sort time: " << ts.total() << std::endl;
     }
 }
 

@@ -100,23 +100,24 @@ static void test_dictionary ()
     }
         
     std::cerr << "Sorting " << words.size() << " words..." << std::endl;
-    
-    const int K = 5;
-    Benchmark::Timer t;
+	std::cerr << "Sort mode = " << DictionarySort::SORT_MODE << std::endl;
+	
+	if (DictionarySort::SORT_MODE > 0)
+		std::cerr << "Parallel merge thread count: " << (1 << DictionarySort::SORT_MODE+1) - 2 << std::endl;
+
+    const int K = 4;
+    Benchmark::WallTime t;
 	Benchmark::ProcessorTime processor_time;
 
     uint64_t checksum;
     for (std::size_t i = 0; i < K; i += 1) {
         checksum = dictionary.sort(words, sorted_words);
     }
-    Benchmark::TimeT elapsed_time = t.time() / K;
-	Benchmark::TimeT elapsed_processor_time = processor_time.time() / K;
+    Benchmark::TimeT elapsed_time = t.total() / K;
     
     std::cerr << "Checksum: " << checksum << " ? " << (checksum == 479465310674138860) << std::endl;
-    std::cerr << "Time: " << elapsed_time << std::endl;
-	std::cerr << "Processor Time: " << elapsed_processor_time << std::endl;
-	std::cerr << "Approximate CPU Usage: " << (elapsed_processor_time / elapsed_time) << std::endl;
-        
+    std::cerr << "Total Time: " << elapsed_time << std::endl;
+
     std::cerr << "Finished." << std::endl;
 }
 

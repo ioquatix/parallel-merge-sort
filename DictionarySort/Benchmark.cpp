@@ -18,16 +18,16 @@ namespace Benchmark {
         return ((TimeT)t.tv_sec) + ((TimeT)t.tv_usec / 1000000.0);
     }
     
-    Timer::Timer () {
+    WallTime::WallTime () {
         this->reset();
     }
     
-    void Timer::reset () {
+    void WallTime::reset () {
         this->_last = system_time();
         this->_total = 0.0;
     }
     
-    TimeT Timer::time () const {
+    TimeT WallTime::total () const {
         TimeT current = system_time();
         this->_total += current - this->_last;
         this->_last = current;
@@ -45,12 +45,27 @@ namespace Benchmark {
 		this->_total = 0;
 	}
 
-	TimeT ProcessorTime::time ()
+	TimeT ProcessorTime::total () const
 	{
 		std::clock_t current = std::clock();
 		this->_total += std::clock() - this->_last;
 		this->_last = current;
 		
 		return TimeT(this->_total) / TimeT(CLOCKS_PER_SEC);
+	}
+
+	Timer::Timer()
+	{
+	}
+
+	void Timer::reset ()
+	{
+		_wall_time.reset();
+		_processor_time.reset();
+	}
+
+	Timer::Sample Timer::sample() const
+	{
+		return {_wall_time.total(), _processor_time.total()};
 	}
 }

@@ -25,9 +25,9 @@ struct pointer_less_than
 
 namespace DictionarySort {
     // Use std::sort
-    const int SORT_MODE = -1;
+    //const int SORT_MODE = -1;
     // Use ParallelMergeSort with 2^n threads
-    //const int SORT_MODE = 5; // = n
+    const int SORT_MODE = 3; // = n
     
     typedef std::uint64_t IndexT;
     
@@ -203,16 +203,23 @@ namespace DictionarySort {
         template <typename ToSortT>
         void sort (ToSortT & words, int mode = 2)
         {
-            Benchmark::Timer ts;
             CompareWordsAscending comparator(this);
-            
+
+			Benchmark::Timer sort_timer;
+
             if (mode == -1) {
                 // Sort the words using built-in sorting algorithm, for comparison:
                 std::sort(words.begin(), words.end(), comparator);
             } else {                
                 ParallelMergeSort::sort(words, comparator, std::size_t(mode));
             }
-            std::cerr << "Dictionary sort time: " << ts.time() << std::endl;
+
+			auto sample = sort_timer.sample();
+
+			std::cerr << "--- Completed Dictionary Sort ---" << std::endl;
+            std::cerr << "	* Dictionary sort time: " << sample.wall_time_total << std::endl;
+			std::cerr << "	* Processor sort time: " << sample.processor_time_total << std::endl;
+			std::cerr << "	* Approximate processor usage: " << sample.approximate_processor_usage() << std::endl;
         }
         
         // This function can be slow due to the large amount of memory required for large datasets.
